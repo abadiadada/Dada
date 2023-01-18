@@ -1,5 +1,6 @@
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView,Platform,TextInput,TouchableOpacity,  StyleSheet, Text, View } from 'react-native';
 import Task from './Components/Task';
 
 export default function App() {
@@ -16,6 +17,18 @@ export default function App() {
             <Task text = {'Colocar comida para o cachorro'}/>
           </View>
       </View>
+      {/*painel para adicionar tarefa*/}
+      <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.writeTaskWrapper}
+      >
+        <TextInput style={styles.input} placeholder={'Escreva uma tarefa'} value={task} onChangeText={text=> setTask(text)}/>
+        <TouchableOpacity onPress={()=> hanleAddTask ()}> 
+        <View style={styles.addWrapper}> 
+        <Text style={styles.addText}> + </Text>
+        </View> 
+        </TouchableOpacity> 
+      </KeyboardAvoidingView>
     </View>
   );
 }
